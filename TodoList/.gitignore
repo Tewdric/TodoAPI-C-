@@ -1,0 +1,18 @@
+# Pasta do Visual Studio
+.vs/
+
+# Pastas de compilação e publicação
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+
+# Arquivos de usuário e temporários
+*.user
+*.suo
+*.sln.docstates
+*.tlog
+
+# Arquivos de banco de dados locais
+*.db
+*.mdf
+*.ldf
