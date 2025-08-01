@@ -61,33 +61,29 @@ namespace TodoList.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTask(int id, [FromBody] TodoTask updatedTask)
+        public async Task<IActionResult> UpdateTask(int id, [FromBody] TaskUpdateDto updatedTaskDto)
         {
-            
             var userIdString = User.FindFirstValue("id");
             var userId = int.Parse(userIdString!);
 
-           
             var taskFromDb = await _context.Tasks.FindAsync(id);
 
-           
             if (taskFromDb == null)
             {
                 return NotFound();
             }
 
-            
             if (taskFromDb.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
 
-            taskFromDb.Description = updatedTask.Description;
-            taskFromDb.IsDone = updatedTask.IsDone;
+            taskFromDb.Description = updatedTaskDto.Description;
+            taskFromDb.IsDone = updatedTaskDto.IsDone;
 
             await _context.SaveChangesAsync();
 
-            return NoContent(); 
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
