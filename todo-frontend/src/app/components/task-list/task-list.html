@@ -1,0 +1,72 @@
+<main>
+  <div class="task-list-container">
+    <div class="header">
+      <h2>Minhas Tarefas</h2>
+      <button (click)="logout()">Logout</button>
+    </div>
+
+    <form (ngSubmit)="addTask()" class="add-task-form">
+      <input 
+        type="text" 
+        [(ngModel)]="newTaskDescription"
+        name="newTaskDescription"
+        placeholder="O que precisa ser feito?"
+        required>
+      <button type="submit">+</button>
+    </form>
+    
+    <div class="table-container">
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks" [class.done-row]="task.isDone">
+            <td>
+              <input 
+                type="checkbox" 
+                [checked]="task.isDone" 
+                (change)="toggleTaskStatus(task)">
+            </td>
+            <td>{{ task.description }}</td>
+            <td>
+              <div class="task-actions">
+                <button (click)="openEditModal(task)" class="edit-btn">Editar</button>
+                <button (click)="deleteTask(task.id)" class="delete-btn">X</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div *ngIf="tasks.length === 0" class="no-tasks">
+        <p>Você ainda não tem tarefas cadastradas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="isEditModalVisible">
+    <div class="modal-content">
+      <h3>Editar Tarefa</h3>
+      <form (ngSubmit)="saveEdit()">
+        <div class="form-group">
+          <label for="editDescription">Descrição:</label>
+          <input 
+            type="text" 
+            id="editDescription"
+            name="editDescription"
+            [(ngModel)]="currentTaskToEdit.description" 
+            required>
+        </div>
+        <div class="modal-actions">
+          <button type="submit">Salvar</button>
+          <button type="button" (click)="closeEditModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
