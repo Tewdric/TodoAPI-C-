@@ -33,7 +33,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.getTasks().subscribe({
       next: (data) => {
         this.tasks = data;
-        console.log('Tarefas carregadas:', this.tasks);
+
       },
       error: (err) => {
         console.error('Erro ao carregar tarefas:', err);
@@ -56,7 +56,6 @@ export class TaskListComponent implements OnInit {
       next: (newTask) => {
         this.tasks.push(newTask);
         this.newTaskDescription = '';
-        console.log('Tarefa criada com sucesso!', newTask);
       },
       error: (err) => {
         console.error('Erro ao criar tarefa:', err);
@@ -68,7 +67,6 @@ export class TaskListComponent implements OnInit {
     this.taskService.deleteTask(taskId).subscribe({
       next: () => {
         this.tasks = this.tasks.filter(task => task.id !== taskId);
-        console.log('Tarefa excluída com sucesso!');
       },
       error: (err) => {
         console.error('Erro ao excluir tarefa:', err);
@@ -82,7 +80,6 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateTask(task.id, updatedTask).subscribe({
       next: () => {
         task.isDone = updatedTask.isDone;
-        console.log('Status da tarefa atualizado!');
       },
       error: (err) => {
         console.error('Erro ao atualizar status da tarefa:', err);
@@ -110,7 +107,6 @@ export class TaskListComponent implements OnInit {
           this.tasks[index] = this.currentTaskToEdit;
         }
         this.closeEditModal();
-        console.log('Tarefa atualizada com sucesso!');
       },
       error: (err) => {
         console.error('Erro ao atualizar tarefa:', err);

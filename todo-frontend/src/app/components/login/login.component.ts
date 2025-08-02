@@ -25,7 +25,7 @@ export class LoginComponent {
   onSubmit(): void {
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
-        console.log('Login bem-sucedido!', response);
+        
         localStorage.setItem('authToken', response.token);
 
         // NAVEGA PARA A PÁGINA DE TAREFAS

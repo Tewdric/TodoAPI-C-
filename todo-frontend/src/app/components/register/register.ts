@@ -28,7 +28,6 @@ export class RegisterComponent {
   onSubmit(): void {
     this.authService.register(this.registerData).subscribe({
       next: (response) => {
-        console.log('Usuário registrado com sucesso!', response);
         alert('Cadastro realizado com sucesso! Por favor, faça o login.');
         this.router.navigate(['/login']);
       },
